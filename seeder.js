@@ -4,6 +4,15 @@ const fs = require('fs');
 const mongoose = require('mongoose');
 const colors = require('colors');
 const dotenv = require('dotenv');
+const cliProgress = require('cli-progress');
+
+const bar1 = new cliProgress.SingleBar({
+  format: 'Progress |' + colors.green('{bar}') + '| {percentage}%',
+  barCompleteChar: '\u2588',
+  barIncompleteChar: '\u2591',
+  fps: 5,
+});
+bar1.start(100, 0);
 
 // Load env vars
 dotenv.config({ path: './config/config.env' });
@@ -28,7 +37,7 @@ const courses = JSON.parse(fs.readFileSync(`${__dirname}/_data/courses.json`, 'u
 const importData = async () => {
   try {
     await Bootcamp.create(bootcamps);
-    await Course.create(courses);
+    // await Course.create(courses);
     console.log('Data Imported...'.green.inverse);
     process.exit();
   } catch (err) {
@@ -50,7 +59,9 @@ const deleteData = async () => {
 
 // In console when you run "node seeder -i" it runs import script
 if (process.argv[2] === '-i') {
-  importData();
+  bar1.update(importData());
+  bar1.stop();
 } else if (process.argv[2] === '-d') {
-  deleteData();
+  bar1.update(deleteData());
+  bar1.stop();
 }

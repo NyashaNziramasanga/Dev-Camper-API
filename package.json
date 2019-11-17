@@ -10,6 +10,7 @@
   "author": "Nyasha (Nash)",
   "license": "ISC",
   "dependencies": {
+    "cli-progress": "^3.4.0",
     "colors": "^1.4.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
