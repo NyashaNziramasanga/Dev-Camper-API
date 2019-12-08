@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser');
 const errorHandler = require('./middleware/error');
 
 //Load env vars
-dotenv.config({ path: './config/config.env' });
+dotenv.config({ path: './config/config.env.env' });
 
 //Connect to database
 connectDB();
