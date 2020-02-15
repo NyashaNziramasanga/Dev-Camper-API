@@ -1,17 +1,18 @@
 //
 // API CONTROLLERS
 //
-const Course = require('../models/Course');
-const Bootcamp = require('../models/Bootcamp');
-const ErrorResponse = require('../utils/errorResponse');
 const asyncHandler = require('../middleware/async');
+const Bootcamp = require('../models/Bootcamp');
+const Course = require('../models/Course');
+const ErrorResponse = require('../utils/errorResponse');
 
 /** 
-@desc    Get courses
-@route   GET /api/v1/courses
-@route   GET /api/v1/bootcamps/:bootcampId/courses
-@access  Public 
-*/
+ * @desc    Get courses
+ * @route   GET /api/v1/courses
+ * @route   GET /api/v1/bootcamps/:bootcampId/courses
+ * @access  Public 
+ * @param   bootcampId
+ * */
 exports.getCourses = asyncHandler(async (req, res, next) => {
   if (req.params.bootcampId) {
     const courses = await Course.find({ bootcamp: req.params.bootcampId });
@@ -26,10 +27,11 @@ exports.getCourses = asyncHandler(async (req, res, next) => {
 });
 
 /** 
-@desc    Get a single course
-@route   GET /api/v1/courses/:id
-@access  Public 
-*/
+ * @desc    Get a single course
+ * @route   GET /api/v1/courses/:id
+ * @access  Public 
+ * @param   id 
+ * */
 exports.getCourse = asyncHandler(async (req, res, next) => {
   const course = await Course.findById(req.params.id).populate('bootcamp', 'name description');
 
@@ -41,10 +43,11 @@ exports.getCourse = asyncHandler(async (req, res, next) => {
 });
 
 /** 
-@desc    Add course
-@route   POST /api/v1/bootcamps/:bootcampId/courses
-@access  Private 
-*/
+ * @desc    Add course
+ * @route   POST /api/v1/bootcamps/:bootcampId/courses
+ * @access  Private 
+ * @param   bootcampId 
+ * */
 exports.addCourse = asyncHandler(async (req, res, next) => {
   req.body.bootcamp = req.params.bootcampId;
   req.body.user = req.user.id;
@@ -71,9 +74,10 @@ exports.addCourse = asyncHandler(async (req, res, next) => {
 });
 
 /** 
-@desc    Update course
-@route   PUT /api/v1/courses/:id
-@access  Private 
+ * @desc    Update course
+ * @route   PUT /api/v1/courses/:id
+ * @access  Private 
+ * @param   id 
 */
 exports.updateCourse = asyncHandler(async (req, res, next) => {
   let course = await Course.findById(req.params.id);
@@ -101,10 +105,11 @@ exports.updateCourse = asyncHandler(async (req, res, next) => {
 });
 
 /** 
-@desc    Delete course
-@route   DELETE /api/v1/courses/:id
-@access  Private 
-*/
+ * @desc    Delete course
+ * @route   DELETE /api/v1/courses/:id
+ * @access  Private 
+ * @param   id 
+ * */
 exports.deleteCourse = asyncHandler(async (req, res, next) => {
   const course = await Course.findById(req.params.id);
 
