@@ -1,14 +1,18 @@
-const ErrorResponse = require('../utils/errorResponse');
 const asyncHandler = require('../middleware/async');
-const sendEmail = require('../utils/sendemail');
 const crypto = require('crypto');
+const ErrorResponse = require('../utils/errorResponse');
+const sendEmail = require('../utils/sendemail');
 const User = require('../models/User');
-
+ 
 /** 
-@desc    Register user
-@route   POST /api/v1/auth/register
-@access  Public 
-*/
+ * @desc    Register user
+ * @route   POST /api/v1/auth/register
+ * @access  Public 
+ * @param   name
+ * @param   email
+ * @param   password
+ * @param   role 
+ * */
 exports.register = asyncHandler(async (req, res, next) => {
   const { name, email, password, role } = req.body;
 
@@ -24,10 +28,12 @@ exports.register = asyncHandler(async (req, res, next) => {
 });
 
 /** 
-@desc    Login user
-@route   POST /api/v1/auth/login
-@access  Public 
-*/
+ * @desc    Login user
+ * @route   POST /api/v1/auth/login
+ * @access  Public 
+ * @param   email 
+ * @param   password 
+ * */
 exports.login = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
 
@@ -54,10 +60,10 @@ exports.login = asyncHandler(async (req, res, next) => {
 });
 
 /** 
-@desc    Get current logged in user
-@route   POST /api/v1/auth/me
-@access  Private 
-*/
+ * @desc    Get current logged in user
+ * @route   POST /api/v1/auth/me
+ * @access  Private 
+ * */
 
 exports.getMe = asyncHandler(async (req, res, next) => {
   const user = await User.findById(req.user.id);
@@ -69,11 +75,12 @@ exports.getMe = asyncHandler(async (req, res, next) => {
 });
 
 /** 
-@desc    Update user details
-@route   PUT /api/v1/auth/updatedetails
-@access  Private 
-*/
-
+ * @desc    Update user details
+ * @route   PUT /api/v1/auth/updatedetails
+ * @access  Private 
+ * @param   name 
+ * @param   email 
+ * */
 exports.updateDetails = asyncHandler(async (req, res, next) => {
   const fieldsToUpdate = {
     name: req.body.name,
@@ -92,11 +99,12 @@ exports.updateDetails = asyncHandler(async (req, res, next) => {
 });
 
 /** 
-@desc    Update password
-@route   PUT /api/v1/auth/updatepassword
-@access  Private 
-*/
-
+ * @desc    Update password
+ * @route   PUT /api/v1/auth/updatepassword
+ * @access  Private 
+ * @param   currentPassword 
+ * @param   newPassword 
+ * */
 exports.updatePassword = asyncHandler(async (req, res, next) => {
   const user = await User.findById(req.user.id).select('+password');
 
@@ -112,10 +120,11 @@ exports.updatePassword = asyncHandler(async (req, res, next) => {
 });
 
 /** 
-@desc    Forgot password
-@route   POST /api/v1/auth/forgotpassword
-@access  Public 
-*/
+ * @desc    Forgot password
+ * @route   POST /api/v1/auth/forgotpassword
+ * @access  Public 
+ * @param   email 
+ * */
 
 exports.forgotPassword = asyncHandler(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
@@ -158,11 +167,12 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
 });
 
 /** 
-@desc    Reset password
-@route   PUT /api/v1/auth/resetpassword/:resettoken
-@access  Public 
-*/
-
+ * @desc    Reset password
+ * @route   PUT /api/v1/auth/resetpassword/:resettoken
+ * @access  Public 
+ * @param   resettoken
+ * @param   password
+ * */
 exports.resetPassword = asyncHandler(async (req, res, next) => {
   // Get hashed token
   const resetPasswordToken = crypto
