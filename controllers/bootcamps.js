@@ -1,26 +1,27 @@
 //
 // API CONTROLLERS
 //
-const Path = require('path');
+const asyncHandler = require('../middleware/async');
 const Bootcamp = require('../models/Bootcamp');
 const ErrorResponse = require('../utils/errorResponse');
 const geocoder = require('../utils/geocoder');
-const asyncHandler = require('../middleware/async');
+const Path = require('path');
 
 /** 
-@desc    Get all Bootcamps
-@route   GET /api/v1/bootcamps
-@access  Public 
-*/
+ * @desc    Get all Bootcamps
+ * @route   GET /api/v1/bootcamps
+ * @access  Public 
+ * */
 exports.getBootcamps = asyncHandler(async (req, res, next) => {
   res.status(200).json(res.advancedResults);
 });
 
 /**
-@desc    Get all Bootcamps
-@route   GET /api/v1/bootcamps/:1
-@access  Public 
-*/
+ * @desc    Get all Bootcamps
+ * @route   GET /api/v1/bootcamps/:1
+ * @access  Public 
+ * @param   id 
+ * */
 exports.getBootcamp = asyncHandler(async (req, res, next) => {
   const bootcamp = await Bootcamp.findById(req.params.id);
 
@@ -32,10 +33,11 @@ exports.getBootcamp = asyncHandler(async (req, res, next) => {
 });
 
 /**
-@desc    Creat new bootcamp
-@route   POST /api/v1/bootcamps
-@access  Private 
-*/
+ * @desc    Creat new bootcamp
+ * @route   POST /api/v1/bootcamps
+ * @access  Private 
+ * @param   id 
+ * */
 exports.createBootcamp = asyncHandler(async (req, res, next) => {
   // Add logged in user to req.body
   req.body.user = req.user.id;
@@ -59,10 +61,12 @@ exports.createBootcamp = asyncHandler(async (req, res, next) => {
 });
 
 /** 
-@desc    Update bootcamp
-@route   PUT /api/v1/bootcamps/:id
-@access  Private 
-*/
+ * @desc    Update bootcamp
+ * @route   PUT /api/v1/bootcamps/:id
+ * @access  Private 
+ * @param   id
+ * @param   role
+ * */
 exports.updateBootcamp = asyncHandler(async (req, res, next) => {
   let bootcamp = await Bootcamp.findById(req.params.id);
 
@@ -86,10 +90,12 @@ exports.updateBootcamp = asyncHandler(async (req, res, next) => {
 });
 
 /**
-@desc    Delete bootcamp
-@route   DELETE /api/v1/bootcamps/:id
-@access  Private 
-*/
+ * @desc    Delete bootcamp
+ * @route   DELETE /api/v1/bootcamps/:id
+ * @access  Private 
+ * @param   id 
+ * @parma   role 
+ * */
 exports.deleteBootcamp = asyncHandler(async (req, res, next) => {
   const bootcamp = await Bootcamp.findById(req.params.id);
 
@@ -110,9 +116,11 @@ exports.deleteBootcamp = asyncHandler(async (req, res, next) => {
 });
 
 /**
-@desc    Get Bootcamps within a radius
-@route   GET /api/v1/bootcamps/radius/:zipcode/:distance
-@access  Private 
+ * @desc    Get Bootcamps within a radius
+ * @route   GET /api/v1/bootcamps/radius/:zipcode/:distance
+ * @access  Private 
+ * @param   zipcode
+ * @param   distance
 */
 exports.getBootcampsInRadius = asyncHandler(async (req, res, next) => {
   const { zipcode, distance } = req.params;
@@ -139,10 +147,13 @@ exports.getBootcampsInRadius = asyncHandler(async (req, res, next) => {
 });
 
 /**
-@desc    Upload Photo for bootcamp
-@route   PUT /api/v1/bootcamps/:id/photo
-@access  Private 
-*/
+ * @desc    Upload Photo for bootcamp
+ * @route   PUT /api/v1/bootcamps/:id/photo
+ * @access  Private 
+ * @param   id 
+ * @param   role 
+ * @param   files 
+ * */
 exports.bootcampPhotoUpload = asyncHandler(async (req, res, next) => {
   const bootcamp = await Bootcamp.findById(req.params.id);
 
