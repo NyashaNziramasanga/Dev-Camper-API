@@ -1,13 +1,14 @@
+// 
+// AUTH CONTROLLER
+// 
+
 const crypto = require('crypto');
 const ErrorResponse = require('../utils/errorResponse');
 const sendEmail = require('../utils/sendemail');
 const User = require('../models/User');
 const SendTokenResponse = require('../middleware/sendTokenResponse');
  
-/**
- * @desc    Auth Controller Methods
- * */ 
-const Auth = {
+const AuthCon = {
   /** 
    * @desc    Register user
    * @route   POST /api/v1/auth/register
@@ -201,4 +202,4 @@ const Auth = {
   },
 }
 
-module.exports = Auth;
+module.exports = AuthCon;

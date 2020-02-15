@@ -11,7 +11,7 @@ const courseRouter = require('./courses');
 const { protect, authorize } = require('../middleware/auth');
 
 // Re-route into other resource routers
-router.use('/:bootcampId/courses',asyncHandler(con.courseRouter));
+router.use('/:bootcampId/courses',asyncHandler(courseRouter));
 
 router.route('/radius/:zipcode/:distance').get(asyncHandler(con.getBootcampsInRadius));
 

@@ -1,12 +1,12 @@
 //
-// API CONTROLLERS
+// BOOTCAMPS CONTROLLER
 //
 const Bootcamp = require('../models/Bootcamp');
 const ErrorResponse = require('../utils/errorResponse');
 const geocoder = require('../utils/geocoder');
 const Path = require('path');
 
-const Bootcamps = {
+const BootcampsCon = {
   /** 
    * @desc    Get all Bootcamps
    * @route   GET /api/v1/bootcamps
@@ -204,4 +204,4 @@ const Bootcamps = {
   },
 }
 
-module.exports = Bootcamps; 
+module.exports = BootcampsCon; 
