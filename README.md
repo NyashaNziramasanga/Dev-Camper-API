@@ -2,7 +2,7 @@
 Backend API for DevCamper application, which is a bootcamp directory website
 
 ## Postman Docs
-[]()
+Postman API documentation [here](https://documenter.getpostman.com/view/9366343/SWTK3ZQF?version=latest)
 
 ## Usage
 Rename "config/config.env.env" to "config/config.env" and update the values/settings to your own
