@@ -13,13 +13,13 @@ router.use(authorize('admin'));
 
 router
 	.route('/')
-	.get(advancedResults(User), con.getUsers)
-	.post(con.createUser);
+	.get(advancedResults(User), asyncHandler(con.getUsers))
+	.post(asyncHandler(con.createUser));
 
 router
 	.route('/:id')
-	.get(con.getUser)
-	.put(con.updateUser)
-	.delete(con.deleteUser);
+	.get(asyncHandler(con.getUser))
+	.put(asyncHandler(con.updateUser))
+	.delete(asyncHandler(con.deleteUser));
 
 module.exports = router;

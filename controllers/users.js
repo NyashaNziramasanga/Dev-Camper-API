@@ -1,5 +1,3 @@
-const ErrorResponse = require('../utils/errorResponse');
-const sendEmail = require('../utils/sendemail');
 const User = require('../models/User');
 
 const UsersCon = {
@@ -9,7 +7,7 @@ const UsersCon = {
 	 * @access  Private/Admin
 	 * */
 	async getUsers(req, res, next) {
-		res.status(200).json(res.advancedResults);
+		await res.status(200).json(res.advancedResults);
 	},
 	/**
 	 * @desc    Get single user
@@ -47,7 +45,7 @@ const UsersCon = {
 	 * @access  Private/Admin
 	 * */
 	async deleteUser(req, res, next) {
-		User.findByIdAndDelete(req.params.id);
+		await User.findByIdAndDelete(req.params.id);
 		res.status(200).json({ success: true, data: {} });
 	}
 };
