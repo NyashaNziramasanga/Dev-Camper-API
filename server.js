@@ -12,7 +12,7 @@ const errorHandler = require('./middleware/error');
 dotenv.config({ path: './config/config.env.env' });
 
 //Connect to database
-connectDB();
+if (connectDB()) console.log(`🔌 MongoDB Database Connected...🔌`.yellow.bold);
 
 // Route files
 const bootcamps = require('./routes/bootcamps');
@@ -48,7 +48,6 @@ app.use('/api/v1/users', users);
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
-
 const server = app.listen(
 	PORT,
 	console.log(
