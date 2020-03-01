@@ -7,11 +7,13 @@ const router = express.Router();
 
 // Include other resource routers
 const courseRouter = require('./courses');
+const reviewRouter = require('./reviews');
 
 const { protect, authorize } = require('../middleware/auth');
 
 // Re-route into other resource routers
 router.use('/:bootcampId/courses',asyncHandler(courseRouter));
+router.use('/:bootcampId/reviews',asyncHandler(reviewRouter));
 
 router.route('/radius/:zipcode/:distance').get(asyncHandler(con.getBootcampsInRadius));
 
