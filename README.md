@@ -12,18 +12,18 @@ Rename "config/config.env.env" to "config/config.env" and update the values/sett
 
 ```bash
 # Install Dependencies
-npm install
+$ npm install
 
 # Run in dev mode
-npm run dev
+$ npm run dev
 
 # Run in prod mode
-npm start
+$ npm start
 ```
 
 ## Database Seeder
 
-To seed the database with users, bootcamps, courses and reviews with data from the "_data" folder, run
+To seed the database with users, bootcamps, courses and reviews with data from the "\_data" folder, run
 
 ```bash
 # Destroy all data
@@ -33,5 +33,6 @@ node seeder -d
 node seeder -i
 ```
 
-## Reference
-Inspired by [BradTraversy](https://github.com/bradtraversy)
+## References
+
+- [BradTraversy devcamper-api](https://github.com/bradtraversy/devcamper-api)
