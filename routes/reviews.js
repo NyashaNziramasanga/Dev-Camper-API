@@ -12,6 +12,8 @@ router
   .get(
     advancedResults(Review, { path: 'bootcamp', select: 'name description' }),
     asyncHandler(con.getReviews)
-  )
+  );
+
+router.route('/:id').get(asyncHandler(con.getReview));
 
 module.exports = router;

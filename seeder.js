@@ -10,7 +10,7 @@ const bar1 = new cliProgress.SingleBar({
   format: 'Progress |' + colors.green('{bar}') + '| {percentage}%',
   barCompleteChar: '\u2588',
   barIncompleteChar: '\u2591',
-  fps: 5,
+  fps: 5
 });
 bar1.start(100, 0);
 
@@ -21,19 +21,29 @@ dotenv.config({ path: './config/config.env.env' });
 const Bootcamp = require('./models/Bootcamp');
 const Course = require('./models/Course');
 const User = require('./models/User');
+const Review = require('./models/Review');
 
 // Connect to database
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
-  useUnifiedTopology: true,
+  useUnifiedTopology: true
 });
 
 //Read JSON files
-const bootcamps = JSON.parse(fs.readFileSync(`${__dirname}/_data/bootcamps.json`, 'utf-8'));
-const courses = JSON.parse(fs.readFileSync(`${__dirname}/_data/courses.json`, 'utf-8'));
-const users = JSON.parse(fs.readFileSync(`${__dirname}/_data/users.json`, 'utf-8'));
+const bootcamps = JSON.parse(
+  fs.readFileSync(`${__dirname}/_data/bootcamps.json`, 'utf-8')
+);
+const courses = JSON.parse(
+  fs.readFileSync(`${__dirname}/_data/courses.json`, 'utf-8')
+);
+const users = JSON.parse(
+  fs.readFileSync(`${__dirname}/_data/users.json`, 'utf-8')
+);
+const reviews = JSON.parse(
+  fs.readFileSync(`${__dirname}/_data/reviews.json`, 'utf-8')
+);
 
 // Import into DB
 const importData = async () => {
@@ -41,7 +51,9 @@ const importData = async () => {
     await Bootcamp.create(bootcamps);
     await Course.create(courses);
     await User.create(users);
-    console.log('Data Imported...'.green.inverse);
+    await Review.create(reviews);
+    bar1.stop();
+    console.log('✅ Data Imported...'.green);
     process.exit();
   } catch (err) {
     console.error(err);
@@ -54,7 +66,9 @@ const deleteData = async () => {
     await Bootcamp.deleteMany();
     await Course.deleteMany();
     await User.deleteMany();
-    console.log('Data Destroyed...'.red.inverse);
+    await Review.deleteMany();
+    bar1.stop();
+    console.log('✅ Data Destroyed...'.red);
     process.exit();
   } catch (err) {
     console.error(err);
@@ -64,8 +78,6 @@ const deleteData = async () => {
 // In console when you run "node seeder -i" it runs import script
 if (process.argv[2] === '-i') {
   bar1.update(importData());
-  bar1.stop();
 } else if (process.argv[2] === '-d') {
   bar1.update(deleteData());
-  bar1.stop();
 }
