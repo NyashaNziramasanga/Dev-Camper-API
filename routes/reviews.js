@@ -12,7 +12,8 @@ router
   .get(
     advancedResults(Review, { path: 'bootcamp', select: 'name description' }),
     asyncHandler(con.getReviews)
-  );
+  )
+  .post(protect, authorize('user', 'admin'), asyncHandler(con.addReview));
 
 router.route('/:id').get(asyncHandler(con.getReview));
 
