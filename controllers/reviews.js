@@ -105,6 +105,32 @@ const ReviewsCon = {
       success: true,
       data: review
     });
+  },
+  /**
+   * @desc    Delete review
+   * @route   DELETE /api/v1/reviews/:id
+   * @access  Private
+   * */
+  async deleteReview(req, res, next) {
+    const review = await Review.findById(req.params.id);
+
+    if (!review) {
+      return next(
+        new ErrorResponse(`No review with the id of ${req.params.id}`, 404)
+      );
+    }
+
+    // Make sure review belongs to user or is admin
+    if (review.user.toString() !== req.user.id && req.user.role !== 'admin') {
+      return next(new ErrorResponse('Not authorized to update review', 401));
+    }
+
+    await review.remove();
+
+    res.status(200).json({
+      success: true,
+      data: {}
+    });
   }
 };
 module.exports = ReviewsCon;
