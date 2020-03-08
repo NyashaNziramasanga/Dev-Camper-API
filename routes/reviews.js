@@ -15,6 +15,9 @@ router
   )
   .post(protect, authorize('user', 'admin'), asyncHandler(con.addReview));
 
-router.route('/:id').get(asyncHandler(con.getReview));
+router
+  .route('/:id')
+  .get(asyncHandler(con.getReview))
+  .put(protect, authorize('user', 'admin'), asyncHandler(con.updateReview));
 
 module.exports = router;
