@@ -4,63 +4,63 @@ const CourseSchema = new mongoose.Schema({
   title: {
     type: String,
     trim: true,
-    required: [ true, 'Please add a course title' ],
+    required: [true, 'Please add a course title']
   },
   description: {
     type: String,
-    required: [ true, 'Please add a description' ],
+    required: [true, 'Please add a description']
   },
   weeks: {
     type: String,
-    required: [ true, 'Please add number of weeks' ],
+    required: [true, 'Please add number of weeks']
   },
   tuition: {
     type: Number,
-    required: [ true, 'Please add tuition cost' ],
+    required: [true, 'Please add tuition cost']
   },
   minimumSkill: {
     type: String,
-    required: [ true, 'Please add minimum sill' ],
-    enum: [ 'beginner', 'intermediate', 'advanced' ],
+    required: [true, 'Please add minimum sill'],
+    enum: ['beginner', 'intermediate', 'advanced']
   },
   scholarshipAvailable: {
     type: Boolean,
-    default: false,
+    default: false
   },
   createdAt: {
     type: Date,
-    default: Date.now,
+    default: Date.now
   },
   bootcamp: {
     type: mongoose.Schema.ObjectId,
     ref: 'Bootcamp',
-    required: true,
+    required: true
   },
   user: {
     type: mongoose.Schema.ObjectId,
     ref: 'User',
-    required: true,
-  },
+    required: true
+  }
 });
 
-// Static method eto get average of course tuitions
+// Static method to get average of course tuitions
 CourseSchema.statics.getAverageCost = async function(bootcampId) {
   const obj = await this.aggregate([
     {
-      $match: { bootcamp: bootcampId },
+      $match: { bootcamp: bootcampId }
     },
     {
       $group: {
         _id: '$bootcamp',
-        averageCost: { $avg: '$tuition' },
-      },
-    },
+        averageCost: { $avg: '$tuition' }
+      }
+    }
   ]);
 
   try {
     // Grab Bootcamp model and update bootcamp by ID and add average course
     await this.model('Bootcamp').findByIdAndUpdate(bootcampId, {
-      averageCost: Math.ceil(obj[0].averageCost / 10) * 10,
+      averageCost: Math.ceil(obj[0].averageCost / 10) * 10
     });
   } catch (err) {
     console.log(err);
