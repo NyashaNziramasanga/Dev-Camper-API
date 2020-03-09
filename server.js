@@ -7,6 +7,7 @@ const colors = require('colors');
 const fileupload = require('express-fileupload');
 const cookieParser = require('cookie-parser');
 const errorHandler = require('./middleware/error');
+const cors = require('cors');
 
 // Security middleware
 const mongoSanitize = require('express-mongo-sanitize');
@@ -63,6 +64,9 @@ app.use(limiter);
 
 // Prevent HTTP param pollution
 app.use(hpp());
+
+// Enable CORS
+app.use(cors());
 
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
