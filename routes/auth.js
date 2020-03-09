@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.post('/register', asyncHandler(con.register));
 router.post('/login', asyncHandler(con.login));
+router.get('/logout', asyncHandler(con.logout));
 router.get('/me', protect, asyncHandler(con.getMe));
 
 router.put('/updatedetails', protect, asyncHandler(con.updateDetails));
