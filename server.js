@@ -17,7 +17,7 @@ const hpp = require('hpp');
 const rateLimit = require('express-rate-limit');
 
 //Load env vars
-dotenv.config({ path: './config/config.env.env' });
+dotenv.config({ path: './config/config.env' });
 
 //Connect to database
 if (connectDB()) console.log(`🔌 MongoDB Database Connected...🔌`.yellow.bold);

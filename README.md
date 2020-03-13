@@ -35,6 +35,17 @@ node seeder -d
 node seeder -i
 ```
 
+## Config.env.env
+
+Add your MongoDB and Geocoder api keys to a new file called `config.env` file
+
+```javascript
+MONGO_URI=
+
+GEOCODER_PROVIDER=mapquest
+GEOCODER_API_KEY=
+```
+
 ## References
 
 - [BradTraversy devcamper-api](https://github.com/bradtraversy/devcamper-api)

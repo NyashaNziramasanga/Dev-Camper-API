@@ -15,7 +15,7 @@ const bar1 = new cliProgress.SingleBar({
 bar1.start(100, 0);
 
 // Load env vars
-dotenv.config({ path: './config/config.env.env' });
+dotenv.config({ path: './config/config.env' });
 
 //Load models
 const Bootcamp = require('./models/Bootcamp');
