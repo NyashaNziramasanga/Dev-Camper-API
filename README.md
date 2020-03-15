@@ -8,7 +8,7 @@ DevCamper Postman API documentation [here](https://documenter.getpostman.com/vie
 
 ![postman-docs](images/postman-docs.png)
 
-## Usage
+## Getting Started
 
 Rename "config/config.env.env" to "config/config.env" and update the values/settings to your own
 
