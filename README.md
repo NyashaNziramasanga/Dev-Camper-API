@@ -1,6 +1,6 @@
 # 📖 Dev-Camper-API 📖
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/35a6362e-d92f-4859-8748-3854d11b6c4f/deploy-status)](https://app.netlify.com/sites/nyasha-nziramasanga/deploys) [![time tracker](https://wakatime.com/badge/github/NyashaNziramasanga/Dev-Camper-API.svg)](https://wakatime.com/badge/github/NyashaNziramasanga/Dev-Camper-API)
+[![time tracker](https://wakatime.com/badge/github/NyashaNziramasanga/Dev-Camper-API.svg)](https://wakatime.com/badge/github/NyashaNziramasanga/Dev-Camper-API)
 
 Backend API for DevCamper application, which is a bootcamp directory website
 
