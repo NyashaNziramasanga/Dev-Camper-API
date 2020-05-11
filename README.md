@@ -25,6 +25,10 @@ $ npm run dev
 $ npm start
 ```
 
+## Architecture
+
+![devcamper-architecture](images/devcamper-architecture.jpg)
+
 ## Database Seeder
 
 To seed the database with users, bootcamps, courses and reviews with data from the "\_data" folder, run
